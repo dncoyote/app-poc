@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  mysql-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test123
+      MYSQL_DATABASE: test_crud
+    ports:
+      - '3307:3306'
