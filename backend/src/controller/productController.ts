@@ -55,12 +55,12 @@ export const updateProduct = async (req: Request, res: Response) => {
 };
 
 // Get all products
-// export const getAllProducts = async (req: Request, res: Response) => {
-//   try {
-//     const [rows] = await query('SELECT * FROM Products');
-//     res.status(200).json(rows);
-//   } catch (error) {
-//     console.error('Error getting products:', error);
-//     res.status(500).json({ message: 'Error getting products' });
-//   }
-// };
+export const getAllProducts = async (req: Request, res: Response) => {
+  try {
+    const [rows] = await query('SELECT * FROM Products');
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error('Error getting products:', error);
+    res.status(500).json({ message: 'Error getting products' });
+  }
+};
