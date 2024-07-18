@@ -6,3 +6,8 @@
 - npm install googleapis@105 @google-cloud/local-auth@2.1.0 --save
 - npm install mysql2
 - npm install --save-dev @types/mysql
+- npm install sequelize sequelize-cli mysql2
+- npx sequelize-cli init
+
+## Run
+- npm start

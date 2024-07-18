@@ -1,8 +1,8 @@
 import mysql from 'mysql2/promise';
-import { Pool } from 'mysql2/promise';
+import { Sequelize } from 'sequelize';
 
-// Create a connection pool
-const pool: Pool = mysql.createPool({
+// MySQL connection pool for raw queries
+const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'test123',
@@ -10,6 +10,12 @@ const pool: Pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
+});
+
+// Initialize Sequelize
+const sequelize = new Sequelize('test_crud', 'root', 'test123', {
+  host: 'localhost',
+  dialect: 'mysql',
 });
 
 // Function to initialize the database
@@ -33,5 +39,8 @@ export const initializeDatabase = async () => {
 
 // Function to query the database
 export const query = (sql: string, values?: any) => {
-    return pool.query(sql, values);
-  };
+  return pool.query(sql, values);
+};
+
+// Export the Sequelize instance
+export default sequelize;

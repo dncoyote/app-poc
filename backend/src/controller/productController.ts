@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { query } from '../db';
+import * as productService from '../service/productService';
 
 // Create a new product
 export const createProduct = async (req: Request, res: Response) => {
@@ -10,13 +10,8 @@ export const createProduct = async (req: Request, res: Response) => {
   }
 
   try {
-    const result: any = await query(
-      'INSERT INTO Products (Price, ProductName) VALUES (?, ?)',
-      [price, productName]
-    );
-
-    const newProductId = result.insertId;
-    res.status(201).json({ ProductID: newProductId, Price: price, ProductName: productName });
+    const newProduct = await productService.createProduct(price, productName);
+    res.status(201).json(newProduct);
   } catch (error) {
     console.error('Error creating product:', error);
     res.status(500).json({ message: 'Error creating product' });
@@ -28,7 +23,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    await query('DELETE FROM Products WHERE ProductID = ?', [id]);
+    await productService.deleteProduct(parseInt(id, 10));
     res.status(200).json({ message: 'Product deleted successfully' });
   } catch (error) {
     console.error('Error deleting product:', error);
@@ -46,7 +41,7 @@ export const updateProduct = async (req: Request, res: Response) => {
   }
 
   try {
-    await query('UPDATE Products SET Price = ?, ProductName = ? WHERE ProductID = ?', [price, productName, id]);
+    await productService.updateProduct(parseInt(id, 10), price, productName);
     res.status(200).json({ message: 'Product updated successfully' });
   } catch (error) {
     console.error('Error updating product:', error);
@@ -54,11 +49,24 @@ export const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
+// Get a product by ID
+export const getProductById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const product = await productService.getProductById(parseInt(id, 10));
+    res.status(200).json(product);
+  } catch (error) {
+    console.error('Error getting product by id:', error);
+    res.status(500).json({ message: 'Error getting product by id' });
+  }
+};
+
 // Get all products
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const [rows] = await query('SELECT * FROM Products');
-    res.status(200).json(rows);
+    const products = await productService.getAllProducts();
+    res.status(200).json(products);
   } catch (error) {
     console.error('Error getting products:', error);
     res.status(500).json({ message: 'Error getting products' });
