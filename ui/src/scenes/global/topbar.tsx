@@ -10,14 +10,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import { tokens } from "../../theme";
 import { ColorModeContext } from "../../theme";
 
-const Topbar: React.FC = () => {
+interface TopbarProps {
+  setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Topbar: React.FC<TopbarProps> = ({ setIsSidebar }) => {
   const theme = useTheme() as Theme;
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
-      {/* SEARCH BAR */}
       <Box
         display="flex"
         sx={{
@@ -31,7 +34,6 @@ const Topbar: React.FC = () => {
         </IconButton>
       </Box>
 
-      {/* ICONS */}
       <Box display="flex">
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (

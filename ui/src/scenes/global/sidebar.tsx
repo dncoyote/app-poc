@@ -18,6 +18,10 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 
+interface SidebarProps {
+  isSidebar: boolean;
+}
+
 // Define types for Item component props
 interface ItemProps {
   title: string;
@@ -46,7 +50,7 @@ const Item: React.FC<ItemProps> = ({ title, to, icon, selected, setSelected }) =
   );
 };
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<SidebarProps> = ({ isSidebar }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
@@ -57,6 +61,8 @@ const Sidebar: React.FC = () => {
       sx={{
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
+          height: '100vh', // Ensures the sidebar covers the full viewport height
+          overflowY: 'auto',
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -110,7 +116,7 @@ const Sidebar: React.FC = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
+                  src="../../assets/user.png"
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
