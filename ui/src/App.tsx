@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
+import ListProduct from "./scenes/product/listProduct";
+import CreateProduct from "./scenes/product/createProduct";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 
@@ -21,10 +23,12 @@ function App() {
         <CssBaseline />
         <div className="app">
           <Sidebar isSidebar={isSidebar} />
-          <main className="content">
+          <main className="content" style={{marginLeft: "85px"}}>
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<ListProduct />} />
+              <Route path="/listproduct" element={<ListProduct />} />
+              <Route path="/createproduct" element={<CreateProduct />} />
             </Routes>
           </main>
         </div>

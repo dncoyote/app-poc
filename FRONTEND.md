@@ -6,6 +6,10 @@
 - npm install --save-dev @types/react-router-dom
 - npm install react-pro-sidebar
 - npm install @mui/x-data-grid@latest
+- npm install axios
+- npm i yup
+- npm i formik
+
 
 ## Run
 - npm start
