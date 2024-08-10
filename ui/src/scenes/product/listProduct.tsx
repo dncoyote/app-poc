@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, Tabs, Tab } from "@mui/material";
 import { DataGrid, GridToolbar, GridColDef } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/header";
@@ -17,6 +17,8 @@ const Contacts: React.FC = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [products, setProducts] = useState<Product[]>([]);
+  const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const [selectedMonth, setSelectedMonth] = useState<number>(0);
 
   useEffect(() => {
     // Fetch data from the backend
@@ -31,6 +33,13 @@ const Contacts: React.FC = () => {
 
     fetchProducts();
   }, []);
+
+  const handleYearChange = (event: SelectChangeEvent<number>) => {
+    setSelectedYear(Number(event.target.value));
+  };
+  const handleMonthChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setSelectedMonth(newValue);
+  };
 
   // Define columns with type annotation
   const columns: GridColDef[] = [
@@ -52,6 +61,40 @@ const Contacts: React.FC = () => {
         title="PRODUCTS"
         subtitle="List of Products"
       />
+      <FormControl variant="filled" sx={{ minWidth: 120, mb: 2 }}>
+        <InputLabel id="select-year-label">Year</InputLabel>
+        <Select
+          labelId="select-year-label"
+          id="select-year"
+          value={selectedYear}
+          onChange={handleYearChange}
+        >
+          <MenuItem value={2022}>2022</MenuItem>
+          <MenuItem value={2023}>2023</MenuItem>
+          <MenuItem value={2024}>2024</MenuItem>
+        </Select>
+      </FormControl>
+
+      <Tabs
+        value={selectedMonth}
+        onChange={handleMonthChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        aria-label="month tabs"
+      >
+        <Tab label="January" />
+        <Tab label="February" />
+        <Tab label="March" />
+        <Tab label="April" />
+        <Tab label="May" />
+        <Tab label="June" />
+        <Tab label="July" />
+        <Tab label="August" />
+        <Tab label="September" />
+        <Tab label="October" />
+        <Tab label="November" />
+        <Tab label="December" />
+      </Tabs>
       <Box
         m="40px 0 0 0"
         height="75vh"
