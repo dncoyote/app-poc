@@ -32,7 +32,7 @@ const Contacts: React.FC = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [selectedYear, selectedMonth]);
 
   const handleYearChange = (event: SelectChangeEvent<number>) => {
     setSelectedYear(Number(event.target.value));
