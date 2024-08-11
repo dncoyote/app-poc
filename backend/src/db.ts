@@ -29,6 +29,18 @@ export const initializeDatabase = async () => {
         ProductName varchar(255)
       )
     `);
+    
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS Statements (
+        id varchar(36) PRIMARY KEY,
+        Category varchar(255),
+        Type ENUM('SALARY', 'CREDIT', 'DEBIT'),
+        Amount decimal(10, 2),
+        Description varchar(255),
+        Date datetime
+      )
+    `);
+    
     connection.release();
     console.log('Database initialized successfully');
   } catch (error) {

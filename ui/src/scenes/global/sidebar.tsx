@@ -171,6 +171,34 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebar }) => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
+              Statement
+            </Typography>
+            <Item
+              title="List Statement"
+              to="/liststatement"
+              icon={<AccountBalanceIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Create Statement"
+              to="/createstatement"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="List Google Statement"
+              to="/listgooglestatement"
+              icon={<FaceRetouchingNaturalIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
               Data
             </Typography>
             <Item
